@@ -208,6 +208,12 @@ export const AuthProvider = ({ children }) => {
     dispatch({ type: 'LOGOUT' });
   };
 
+  // const getRandomInt = (min, max) => {
+  //   min = Math.ceil(min);
+  //   max = Math.floor(max);
+  //   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+  // }
+
   const register = async values => {
     try {
       const url = 'https://secure.vezeti.net/test-api/v3/signup/';
@@ -232,6 +238,7 @@ export const AuthProvider = ({ children }) => {
       const isSuccess = response.data.responseCode == '00' ? true : false;
 
       if (isSuccess) {
+        console.log(values)
         dispatch({
           type: 'REGISTER',
           payload: {
