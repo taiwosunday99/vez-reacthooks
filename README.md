@@ -1,5 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-[![Netlify Status](https://api.netlify.com/api/v1/badges/9b7f1512-f142-4006-b8e4-08a67688039c/deploy-status)](https://app.netlify.com/sites/vezeti-app/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7d1c0673-9c56-40e7-aba9-c9dd90bdbdc1/deploy-status)](https://app.netlify.com/sites/clever-lamport-a9e85f/deploys)
 
 ## Available Scripts
 
