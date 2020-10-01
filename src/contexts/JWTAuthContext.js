@@ -4,7 +4,6 @@ import SplashScreen from 'src/components/SplashScreen';
 import axios from 'src/utils/axios';
 import * as axios2 from 'axios';
 
-
 const initialAuthState = {
   isAuthenticated: false,
   isInitialised: false,
@@ -15,6 +14,8 @@ const isValidToken = accessToken => {
   if (!accessToken) {
     return false;
   }
+
+
 
   const decoded = jwtDecode(accessToken);
   const currentTime = Date.now() / 1000;
@@ -33,8 +34,8 @@ const setSession = accessToken => {
 };
 
 const reducer = (state, action) => {
-  switch (action.type) 
-{    case 'INITIALISE': {
+  switch (action.type) {
+    case 'INITIALISE': {
       const { isAuthenticated, user } = action.payload;
       console.log('user', user);
       return {
@@ -56,12 +57,12 @@ const reducer = (state, action) => {
 
     case 'RESET': {
       const { user } = action.payload;
-      console.log('user from Context: ', user)
+      console.log('user from Context: ', user);
       return {
         ...state,
         isAuthenticated: true,
         user
-      }
+      };
     }
     case 'LOGOUT': {
       return {
@@ -97,20 +98,27 @@ const AuthContext = createContext({
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialAuthState);
 
+  const basicAuth = () => {
+    const username = 'taiwosunday99@gmail.com';
+    const password = 'M0ne!Wet1aND!!';
+
+    const useString = `${username}:${password}`;
+
+    return btoa(useString);
+  };
 
   const reset = async values => {
     try {
       const url = 'https://secure.vezeti.net/test-api/v3/forgotpassword/';
       const data = {
-        "orgId": "728934",
-        "referenceId": "3RB3t99390ZI322B18712",
-        "email": values.email,
+        orgId: '728934',
+        referenceId: '3RB3t99390ZI322B18712',
+        email: values.email
       };
       const config = {
         method: 'POST',
         headers: {
-          Authorization:
-            'Basic dGFpd29zdW5kYXk5OUBnbWFpbC5jb206TTBuZSFXZXQxYU5EISE=',
+          Authorization: `Basic ${basicAuth()}`,
           'Content-Type': 'application/json'
         },
         data: JSON.stringify(data),
@@ -128,7 +136,7 @@ export const AuthProvider = ({ children }) => {
             message: response.data.responseMessage
           }
         });
-        
+
         return {
           isSuccess,
           ...response
@@ -142,9 +150,9 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       return {
         ...err
-      }
+      };
     }
-  }
+  };
 
   const login = async values => {
     // https://secure.vezeti.net/api/v3/login/
@@ -160,8 +168,7 @@ export const AuthProvider = ({ children }) => {
       const config = {
         method: 'POST',
         headers: {
-          Authorization:
-            'Basic dGFpd29zdW5kYXk5OUBnbWFpbC5jb206TTBuZSFXZXQxYU5EISE=',
+          Authorization: `Basic ${basicAuth()}`,
           'Content-Type': 'application/json'
         },
         data: JSON.stringify(data),
@@ -202,7 +209,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async values => {
-  
     try {
       const url = 'https://secure.vezeti.net/test-api/v3/signup/';
       const data = {
@@ -216,8 +222,7 @@ export const AuthProvider = ({ children }) => {
       const config = {
         method: 'POST',
         headers: {
-          Authorization:
-            'Basic dGFpd29zdW5kYXk5OUBnbWFpbC5jb206TTBuZSFXZXQxYU5EISE=',
+          Authorization: `Basic ${basicAuth()}`,
           'Content-Type': 'application/json'
         },
         data: JSON.stringify(data),
