@@ -5,7 +5,7 @@
   command = "make production"
   [context.production.environment]
     ACCESS_TOKEN = "super secret"
-    process.env.CI = false
+    command = "CI= npm run build"
 
 # Deploy Preview context:
 # All deploys generated from a pull/merge request
